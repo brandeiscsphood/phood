@@ -26,28 +26,35 @@
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0,0,0,.1);
+            margin-bottom: 2rem;
         }
         .event-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 12px rgba(0,0,0,.15);
         }
         .card-body {
-            padding: 1.5rem;
+            padding: 2rem;
         }
         .card-title {
             font-weight: 600;
             color: #2c3e50;
+            font-size: 1.5rem;
         }
         .card-subtitle {
             font-weight: 400;
             color: #7f8c8d;
+            font-size: 1.1rem;
         }
         .card-text {
             color: #34495e;
+            font-size: 1rem;
         }
         .presenter {
             font-style: italic;
             color: #16a085;
+        }
+        .past-event {
+            opacity: 0.6;
         }
     </style>
 </head>
@@ -59,9 +66,11 @@
     </nav>
 
     <div class="container mt-5">
-        <h1 class="text-center mb-5">Upcoming Phood Events</h1>
-        <div class="row" id="events-container">
-            <!-- Events will be dynamically added here -->
+        <h1 class="text-center mb-5">Phood Events Timeline</h1>
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2" id="events-container">
+                <!-- Events will be dynamically added here -->
+            </div>
         </div>
     </div>
 
@@ -71,22 +80,26 @@
             { title: "Farm-to-Table Cooking", date: "2024-09-11", description: "Learn to cook with fresh, local ingredients", presenter: "Chef Maria Garcia" },
             { title: "Sustainable Seafood Practices", date: "2024-09-25", description: "Explore eco-friendly fishing and consumption", presenter: "Dr. Ocean Blue" },
             { title: "Plant-Based Protein Sources", date: "2024-10-09", description: "Discover delicious alternatives to meat", presenter: "Nutritionist Sam Green" },
-            { title: "Food Waste Reduction Techniques", date: "2024-10-23", description: "Tips and tricks to minimize kitchen waste", presenter: "Eco-Chef Pat Johnson" }
+            { title: "Food Waste Reduction Techniques", date: "2024-10-23", description: "Tips and tricks to minimize kitchen waste", presenter: "Eco-Chef Pat Johnson" },
+            { title: "Seasonal Baking Extravaganza", date: "2024-11-06", description: "Holiday baking techniques and recipes", presenter: "Baker Sue Collins" },
+            { title: "Healthy Meal Prep Workshop", date: "2024-11-20", description: "Learn to prepare healthy meals for the week", presenter: "Dietitian Lisa Chang" },
+            { title: "Holiday Feast Planning", date: "2024-12-04", description: "Plan the perfect holiday feast with expert tips", presenter: "Chef Johnathan Blake" }
         ];
 
         function displayEvents() {
             const container = document.getElementById('events-container');
+            const currentDate = new Date();
             events.forEach(event => {
+                const eventDate = new Date(event.date);
+                const isPastEvent = eventDate < currentDate;
                 const eventElement = document.createElement('div');
-                eventElement.className = 'col-md-6 col-lg-4 mb-4';
+                eventElement.className = `card event-card ${isPastEvent ? 'past-event' : ''}`;
                 eventElement.innerHTML = `
-                    <div class="card event-card h-100">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">${event.title}</h5>
-                            <h6 class="card-subtitle mb-2">${formatDate(event.date)}</h6>
-                            <p class="card-text flex-grow-1">${event.description}</p>
-                            <p class="card-text presenter mb-0">Presented by: ${event.presenter}</p>
-                        </div>
+                    <div class="card-body">
+                        <h5 class="card-title">${event.title}</h5>
+                        <h6 class="card-subtitle mb-2">${formatDate(event.date)}</h6>
+                        <p class="card-text">${event.description}</p>
+                        <p class="card-text presenter mb-0">Presented by: ${event.presenter}</p>
                     </div>
                 `;
                 container.appendChild(eventElement);
