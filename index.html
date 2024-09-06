@@ -9,7 +9,7 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f0f2f5;
+            background-color: #f0f4f8;
             color: #333;
         }
         .navbar {
@@ -18,7 +18,7 @@
         }
         .navbar-brand {
             font-weight: 600;
-            color: #4a4a4a;
+            color: #1e3a8a;
         }
         .event-card {
             transition: all 0.3s ease;
@@ -27,6 +27,7 @@
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0,0,0,.1);
             margin-bottom: 2rem;
+            background-color: #ffffff;
         }
         .event-card:hover {
             transform: translateY(-5px);
@@ -37,37 +38,40 @@
         }
         .card-title {
             font-weight: 600;
-            color: #2c3e50;
+            color: #1e3a8a;
             font-size: 1.5rem;
         }
         .card-subtitle {
             font-weight: 400;
-            color: #7f8c8d;
+            color: #3b82f6;
             font-size: 1.1rem;
         }
         .card-text {
-            color: #34495e;
+            color: #1e40af;
             font-size: 1rem;
         }
         .presenter {
             font-style: italic;
-            color: #16a085;
+            color: #60a5fa;
         }
         .past-event {
             opacity: 0.6;
         }
         /* Color variations for events */
-        .event-card:nth-child(1) { background-color: #f8c471; } /* Light Orange */
-        .event-card:nth-child(2) { background-color: #76d7c4; } /* Light Teal */
-        .event-card:nth-child(3) { background-color: #f7dc6f; } /* Light Yellow */
-        .event-card:nth-child(4) { background-color: #ffcccb; } /* Light Red */
-        .event-card:nth-child(5) { background-color: #a3e4d7; } /* Light Mint */
-        .event-card:nth-child(6) { background-color: #d5dbdb; } /* Light Grey */
-        .event-card:nth-child(7) { background-color: #f5b7b1; } /* Light Pink */
+        .event-card:nth-child(odd) { background-color: #e0f2fe; } /* Light Blue */
+        .event-card:nth-child(even) { background-color: #dbeafe; } /* Slightly Darker Light Blue */
         /* Larger card for the most recent event */
         .most-recent {
-            transform: scale(1.05);
-            box-shadow: 0 6px 12px rgba(0,0,0,.15);
+            transform: scale(1.5);
+            box-shadow: 0 8px 16px rgba(0,0,0,.2);
+            background-color: #bfdbfe !important; /* Distinct blue for the most recent event */
+            z-index: 1;
+        }
+        /* Adjust container for larger card */
+        #events-container {
+            position: relative;
+            padding-top: 3rem;
+            padding-bottom: 3rem;
         }
     </style>
 </head>
@@ -79,7 +83,7 @@
     </nav>
 
     <div class="container mt-5">
-        <h1 class="text-center mb-5">Phood Events Timeline</h1>
+        <h1 class="text-center mb-5" style="color: #1e3a8a;">Phood Events Timeline</h1>
         <div class="row">
             <div class="col-lg-8 offset-lg-2" id="events-container">
                 <!-- Events will be dynamically added here -->
