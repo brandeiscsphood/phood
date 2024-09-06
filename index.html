@@ -158,9 +158,8 @@
         }
         function formatTime(dateString) {
             const date = new Date(dateString);
-            return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' });
+            return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: 'America/New_York' });
         }
-
         window.onload = displayEvents;
     </script>
 </body>
