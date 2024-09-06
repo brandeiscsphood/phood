@@ -140,8 +140,9 @@
         }
 
         function formatDate(dateString) {
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            return new Date(dateString).toLocaleDateString('en-US', options);
+            const date = new Date(dateString);
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' };
+            return date.toLocaleDateString('en-US', options);
         }
 
         window.onload = displayEvents;
