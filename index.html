@@ -56,6 +56,19 @@
         .past-event {
             opacity: 0.6;
         }
+        /* Color variations for events */
+        .event-card:nth-child(1) { background-color: #f8c471; } /* Light Orange */
+        .event-card:nth-child(2) { background-color: #76d7c4; } /* Light Teal */
+        .event-card:nth-child(3) { background-color: #f7dc6f; } /* Light Yellow */
+        .event-card:nth-child(4) { background-color: #ffcccb; } /* Light Red */
+        .event-card:nth-child(5) { background-color: #a3e4d7; } /* Light Mint */
+        .event-card:nth-child(6) { background-color: #d5dbdb; } /* Light Grey */
+        .event-card:nth-child(7) { background-color: #f5b7b1; } /* Light Pink */
+        /* Larger card for the most recent event */
+        .most-recent {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,.15);
+        }
     </style>
 </head>
 <body>
@@ -89,6 +102,8 @@
         function displayEvents() {
             const container = document.getElementById('events-container');
             const currentDate = new Date();
+            let mostRecentFutureEvent = null;
+
             events.forEach(event => {
                 const eventDate = new Date(event.date);
                 const isPastEvent = eventDate < currentDate;
@@ -103,7 +118,20 @@
                     </div>
                 `;
                 container.appendChild(eventElement);
+
+                if (!isPastEvent && (!mostRecentFutureEvent || eventDate < new Date(mostRecentFutureEvent.date))) {
+                    mostRecentFutureEvent = event;
+                }
             });
+
+            if (mostRecentFutureEvent) {
+                const mostRecentElement = Array.from(container.children).find(el => 
+                    el.querySelector('.card-title').textContent === mostRecentFutureEvent.title
+                );
+                if (mostRecentElement) {
+                    mostRecentElement.classList.add('most-recent');
+                }
+            }
         }
 
         function formatDate(dateString) {
