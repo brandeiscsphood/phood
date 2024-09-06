@@ -84,6 +84,28 @@
             font-size: 0.9rem;
             font-weight: bold;
         }
+        .post-it {
+            position: absolute;
+            top: 10px;
+            right: -40px;
+            width: 150px;
+            height: 150px;
+            background-color: #ffeb3b;
+            transform: rotate(45deg);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .post-it-text {
+            transform: rotate(-45deg);
+            font-family: 'Permanent Marker', cursive;
+            font-size: 14px;
+            text-align: center;
+            padding: 10px;
+        }
     </style>
 </head>
 <body>
@@ -147,6 +169,13 @@
                 );
                 if (mostRecentElement) {
                     mostRecentElement.classList.add('most-recent');
+                    const postIt = document.createElement('div');
+                    postIt.className = 'post-it';
+                    const postItText = document.createElement('div');
+                    postItText.className = 'post-it-text';
+                    postItText.textContent = 'All events are held in Volen 101';
+                    postIt.appendChild(postItText);
+                    mostRecentElement.appendChild(postIt);
                 }
             }
         }
